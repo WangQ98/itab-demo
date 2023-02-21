@@ -1,16 +1,17 @@
 <template>
   <div class="app-icon-grid-wrap">
     <div class="app-icon-grid">
-      <ul class="app-icon-wrap">
+      <ul class="app-icon-wrap h-full">
         <template v-for="nav in navConfig" :key="nav.id">
           <transition name="fade">
-            <li v-show="activeNav.id == nav.id" class="app-icon-item">
+            <li v-show="activeNav.id == nav.id" class="h-full">
               <main class="h-full">
-                <section class="grid-stack">
+                <section class="grid-stack h-full">
                   <template v-for="it in nav.children" :key="it.id">
                     <div
                       v-if="it.type == 'icon'"
                       class="app-item grid-stack-item"
+                      @click="handleGridItemClick(it)"
                     >
                       <div
                         class="grid-stack-item-content flex flex-col items-center"
@@ -53,6 +54,7 @@
         </template>
       </ul>
     </div>
+    <AddWidget v-model:dialog-visible="addDialogVisible" />
   </div>
 </template>
 
@@ -60,20 +62,34 @@
 import { GridStack } from "gridstack";
 import { ElMessage } from "element-plus";
 import { useAppStoreWithOut } from "@/store/modules/app";
+import AddWidget from "@/components/AddWidget/index.vue";
 import type { IWidgetItem } from "#/config";
 
 const appStore = useAppStoreWithOut();
 
 const grids = ref<GridStack[]>([]);
+const addDialogVisible = ref<boolean>(false);
 
 const navConfig = computed(() => appStore.getNavConfig);
 const activeNav = computed(() => appStore.getActiveNav);
+
+function handleGridItemClick(widget: IWidgetItem) {
+  console.info("🚀 ~ log:widget ----->", widget);
+  const { type, url } = widget;
+  if (url === "itab://add") {
+    addDialogVisible.value = true;
+    return;
+  }
+  if (type === "icon") {
+    window.open(url);
+  }
+}
 
 onMounted(() => {
   nextTick(() => {
     grids.value = GridStack.initAll({
       float: false,
-      cellHeight: "8vh",
+      cellHeight: "90px",
       minRow: 1,
     });
 

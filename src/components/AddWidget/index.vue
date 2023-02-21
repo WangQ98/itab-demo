@@ -1,0 +1,85 @@
+<template>
+  <el-dialog
+    v-model="dialogVisible"
+    class="d-dialog-model"
+    width="70%"
+    :append-to-body="true"
+  >
+    <div class="h-[550px]">
+      <section class="flex h-full gap-[12px]">
+        <aside class="w-80 h-full bg-white">
+          <ul>
+            <li>小组件</li>
+            <li>网址导航</li>
+            <li>自定义图标</li>
+          </ul>
+        </aside>
+        <main class="flex-1 bg-[#f1f0f5]">
+          <div class="widget-list-wrap grid grid-cols-2 gap-4 mt-10">
+            <div class="widget-icon-item">
+              <div class="app-icon-body">
+                <div>
+                  <h4 class="h-5 mb-2 mt-1 text-[16px]">世界时钟</h4>
+                  <div class="text-[#939393] text-[12px]">
+                    你可以把多个世界的时钟放在浏览器主页上
+                  </div>
+                  <el-carousel
+                    indicator-position="outside"
+                    trigger="click"
+                    height="200px"
+                  >
+                    <el-carousel-item v-for="item in 4" :key="item">
+                      <h3 text="2xl" justify="center">{{ item }}</h3>
+                    </el-carousel-item>
+                  </el-carousel>
+                </div>
+              </div>
+            </div>
+            <div class="widget-icon-item">卡片</div>
+          </div>
+        </main>
+      </section>
+    </div>
+  </el-dialog>
+</template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  dialogVisible: boolean;
+}>();
+
+const emits = defineEmits<{
+  (event: "update:dialogVisible", value: boolean): void;
+}>();
+
+const { dialogVisible } = useVModels(props, emits);
+</script>
+
+<style lang="less">
+.d-dialog-model {
+  .el-dialog__header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    text-align: center;
+    color: #222;
+    z-index: 9;
+  }
+  .el-dialog__body {
+    padding: 0;
+    background-color: #f1f0f5;
+  }
+}
+</style>
+
+<style lang="less" scoped>
+.widget-list-wrap {
+  .widget-icon-item {
+    border-radius: 12px;
+    padding: 10px;
+    background-color: #fff;
+  }
+}
+</style>
