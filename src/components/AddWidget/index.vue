@@ -15,27 +15,25 @@
           </ul>
         </aside>
         <main class="flex-1 bg-[#f1f0f5]">
+          <div>
+            <el-tag
+              v-for="category in IconCategory"
+              :key="category"
+              class="ml-2"
+            >
+              {{ category }}
+            </el-tag>
+          </div>
           <div class="widget-list-wrap grid grid-cols-2 gap-4 mt-10">
-            <div class="widget-icon-item">
-              <div class="app-icon-body">
-                <div>
-                  <h4 class="h-5 mb-2 mt-1 text-[16px]">世界时钟</h4>
-                  <div class="text-[#939393] text-[12px]">
-                    你可以把多个世界的时钟放在浏览器主页上
-                  </div>
-                  <el-carousel
-                    indicator-position="outside"
-                    trigger="click"
-                    height="200px"
-                  >
-                    <el-carousel-item v-for="item in 4" :key="item">
-                      <h3 text="2xl" justify="center">{{ item }}</h3>
-                    </el-carousel-item>
-                  </el-carousel>
-                </div>
-              </div>
-            </div>
-            <div class="widget-icon-item">卡片</div>
+            <template
+              v-for="(categoryWidget, idx) in mapIWidgetCategory()"
+              :key="idx"
+            >
+              <CarouselBox
+                :category-widget="categoryWidget"
+                @append-widget="appendWidget"
+              />
+            </template>
           </div>
         </main>
       </section>
@@ -44,6 +42,10 @@
 </template>
 
 <script setup lang="ts">
+import itabMaterials from "@/utils/itabMaterials";
+import { IconCategory } from "@/enums";
+import CarouselBox from "../containerBox/carouselBox.vue";
+import type { IWidget, IWidgetCategory } from "#/config";
 const props = defineProps<{
   dialogVisible: boolean;
 }>();
@@ -53,6 +55,17 @@ const emits = defineEmits<{
 }>();
 
 const { dialogVisible } = useVModels(props, emits);
+
+const categoryValue = ref<IWidgetCategory>(IconCategory.develop);
+
+function mapIWidgetCategory(): IWidget[] {
+  const categorySet = itabMaterials.getMaterials(categoryValue.value) || [];
+  return [...categorySet];
+}
+
+function appendWidget(widget) {
+  console.log(widget);
+}
 </script>
 
 <style lang="less">
@@ -70,16 +83,6 @@ const { dialogVisible } = useVModels(props, emits);
   .el-dialog__body {
     padding: 0;
     background-color: #f1f0f5;
-  }
-}
-</style>
-
-<style lang="less" scoped>
-.widget-list-wrap {
-  .widget-icon-item {
-    border-radius: 12px;
-    padding: 10px;
-    background-color: #fff;
   }
 }
 </style>

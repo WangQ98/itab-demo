@@ -1,4 +1,10 @@
-type IWidgetType = "component" | "icon";
+import type { IconCategory, IconSize, IconType } from "@/enums";
+
+type IWidgetSize = keyof typeof IconSize;
+
+type IWidgetType = keyof typeof IconType;
+
+type IWidgetCategory = keyof typeof IconCategory;
 
 export interface INavConfig {
   id: string;
@@ -7,10 +13,17 @@ export interface INavConfig {
   children: IWidgetItem[];
 }
 
+export interface IWidget {
+  category: IWidgetCategory;
+  title: string;
+  desc: string;
+  widgets: IWidgetItem[];
+}
+
 export interface IWidgetItem {
   id: string;
   name: string;
-  size: string;
+  size: IWidgetSize;
   type: IWidgetType;
   component: string;
   backgroundColor?: string;

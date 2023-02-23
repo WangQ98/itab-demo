@@ -7,8 +7,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    1x1: typeof import('./../src/components/containerBox/1x1.vue')['default']
+    1x2: typeof import('./../src/components/containerBox/1x2.vue')['default']
+    2x1: typeof import('./../src/components/containerBox/2x1.vue')['default']
+    2x2: typeof import('./../src/components/containerBox/2x2.vue')['default']
+    2x4: typeof import('./../src/components/containerBox/2x4.vue')['default']
     AddWidget: typeof import('./../src/components/AddWidget/index.vue')['default']
+    CarouselBox: typeof import('./../src/components/containerBox/carouselBox.vue')['default']
+    ContainerBox: typeof import('../src/components/containerBox/sizeBox.vue')['default']
+    ContainerSize: typeof import('../src/components/containerBox/sizeBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SizeBox: typeof import('./../src/components/containerBox/sizeBox.vue')['default']
   }
 }

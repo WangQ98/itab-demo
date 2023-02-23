@@ -6,6 +6,7 @@ import "element-plus/theme-chalk/index.css";
 
 import { createApp } from "vue";
 import ElementPlus from "element-plus";
+import "@/packages";
 import App from "./App.vue";
 
 import { setupRouter } from "./router";
