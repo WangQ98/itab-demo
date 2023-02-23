@@ -6,11 +6,17 @@
           <transition name="fade">
             <li v-show="activeNav.id == nav.id" class="h-full">
               <main class="h-full">
-                <section class="grid-stack h-full">
+                <section class="grid-stack h-full" :data-id="nav.id">
                   <template v-for="it in nav.children" :key="it.id">
                     <div
                       v-if="it.type == 'icon'"
+                      :id="it.id"
                       class="app-item grid-stack-item"
+                      :gs-x="it.x"
+                      :gs-y="it.y"
+                      :gs-w="it.w"
+                      :gs-h="it.h"
+                      :gs-id="it.id"
                       @click="handleGridItemClick(it)"
                     >
                       <div
@@ -28,25 +34,28 @@
                         </p>
                       </div>
                     </div>
-                  </template>
-                  <div
-                    class="app-item1 grid-stack-item"
-                    style="width: 330px !important; border-radius: 16px"
-                    gs-w="3"
-                    gs-h="2"
-                  >
                     <div
-                      class="grid-stack-item-content flex flex-col items-center"
-                      style="height: 150px !important"
+                      v-else
+                      :id="it.id"
+                      class="app-item1 grid-stack-item"
+                      :gs-x="it.x"
+                      :gs-y="it.y"
+                      :gs-w="it.w"
+                      :gs-h="it.h"
+                      :gs-id="it.id"
                     >
-                      <img
-                        style="border-radius: 16px"
-                        class="w-full h-full"
-                        src="../../assets/test.jpg"
-                        alt=""
-                      />
+                      <div
+                        class="grid-stack-item-content flex flex-col items-center"
+                      >
+                        <img
+                          style="border-radius: 16px"
+                          class="w-full h-full"
+                          src="../../assets/test.jpg"
+                          alt=""
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </template>
                 </section>
               </main>
             </li>
@@ -61,34 +70,59 @@
 <script setup lang="ts">
 import { GridStack } from "gridstack";
 import { ElMessage } from "element-plus";
+import { generateUUID } from "@/utils";
 import { useAppStoreWithOut } from "@/store/modules/app";
 import AddWidget from "@/components/AddWidget/index.vue";
 import type { IWidgetItem } from "#/config";
 
 const appStore = useAppStoreWithOut();
 
-const grids = ref<GridStack[]>([]);
+const grids = shallowRef<GridStack[]>([]);
 const addDialogVisible = ref<boolean>(false);
 
 const navConfig = computed(() => appStore.getNavConfig);
 const activeNav = computed(() => appStore.getActiveNav);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleGridItemClick(widget: IWidgetItem) {
-  console.info("🚀 ~ log:widget ----->", widget);
-  const { type, url } = widget;
-  if (url === "itab://add") {
-    addDialogVisible.value = true;
-    return;
-  }
-  if (type === "icon") {
-    window.open(url);
-  }
+  addWidgetItem();
+  // console.info("🚀 ~ log:widget ----->", widget);
+  // const { type, url } = widget;
+  // if (url === "itab://add") {
+  //   addDialogVisible.value = true;
+  //   return;
+  // }
+  // if (type === "icon") {
+  //   window.open(url);
+  // }
+}
+
+function addWidgetItem() {
+  const node: IWidgetItem = {
+    id: generateUUID(),
+    name: "",
+    type: "component",
+    size: "",
+    component: "",
+    x: 0,
+    y: 0,
+    w: 3,
+    h: 2,
+  };
+  console.info("🚀 ~ log:activeNav.value ----->", activeNav.value);
+  activeNav.value?.children.push(node);
+  console.info("🚀 ~ log:navConfig.value ----->", navConfig.value);
+  const { id: activeNavId } = activeNav.value;
+  const grid = grids.value.find((it) => it.el?.dataset.id === activeNavId);
+  nextTick(() => {
+    grid?.makeWidget(node.id);
+  });
 }
 
 onMounted(() => {
   nextTick(() => {
     grids.value = GridStack.initAll({
-      float: false,
+      float: false, 
       cellHeight: "90px",
       minRow: 1,
     });
@@ -103,9 +137,15 @@ onMounted(() => {
           message: `成功移动至${node.y / 2 + 1}行${node.x + 1}列`,
         });
       });
+
+      grid.on("change", handleWidgetChange);
     });
   });
 });
+
+function handleWidgetChange(event: any, changeItems: any[]) {
+  console.info("🚀 ~ 触发了change事件,改变位置的元素为 ----->", changeItems);
+}
 
 onUnmounted(() => {
   if (grids.value) {

@@ -1,16 +1,13 @@
 // 生成uuid
-export function generateUid() {
-  const s = [];
-  const hexDigits = "0123456789abcdef";
-  for (let i = 0; i < 32; i++) {
-    s[i] = hexDigits.slice(
-      Math.floor(Math.random() * 0x10),
-      Math.floor(Math.random() * 0x10) + 1
-    );
+export function generateUUID() {
+  let d = Date.now();
+  if (window.performance && typeof window.performance.now === "function") {
+    d += performance.now(); // use high-precision timer if available
   }
-  s[14] = "4";
-  s[19] = hexDigits.slice((s[19] & 0x3) | 0x8, (s[19] & 0x3) | (0x8 + 1));
-
-  const uuid = s.join("");
+  const uuid = "xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = Math.trunc((d + Math.random() * 16) % 16);
+    d = Math.floor(d / 16);
+    return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+  });
   return uuid;
 }

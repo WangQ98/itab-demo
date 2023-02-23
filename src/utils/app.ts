@@ -1,9 +1,9 @@
-import { generateUid } from ".";
+import { generateUUID } from ".";
 import type { INavConfig } from "#/config";
 
 export function createNav(name: string, icon: string): INavConfig {
   return {
-    id: generateUid(),
+    id: generateUUID(),
     name,
     icon,
     children: [],
