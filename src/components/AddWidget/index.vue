@@ -53,6 +53,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   (event: "update:dialogVisible", value: boolean): void;
+  (event: "add", value: IWidgetItem): void;
 }>();
 
 const { dialogVisible } = useVModels(props, emits);
@@ -65,7 +66,7 @@ function mapIWidgetCategory(): IWidget[] {
 }
 
 function appendWidget(widget: IWidgetItem) {
-  console.log(widget);
+  emits("add", widget);
 }
 
 function switchTag(category: IWidgetCategory) {

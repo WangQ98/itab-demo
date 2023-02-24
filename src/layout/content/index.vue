@@ -35,7 +35,7 @@
                       </div>
                     </div>
                     <div
-                      v-else
+                      v-else-if="it.type == 'component'"
                       :id="it.id"
                       class="app-item1 grid-stack-item"
                       :gs-x="it.x"
@@ -45,13 +45,17 @@
                       :gs-id="it.id"
                     >
                       <div
-                        class="grid-stack-item-content flex flex-col items-center"
+                        class="grid-stack-item-content flex flex-col items-center bg-pink-400"
                       >
-                        <img
+                        <!-- <img
                           style="border-radius: 16px"
                           class="w-full h-full"
                           src="../../assets/test.jpg"
                           alt=""
+                        /> -->
+                        <component
+                          :is="itabMaterials.queryMaterial(it.name)"
+                          :key="it.id"
                         />
                       </div>
                     </div>
@@ -63,7 +67,10 @@
         </template>
       </ul>
     </div>
-    <AddWidget v-model:dialog-visible="addDialogVisible" />
+    <AddWidget
+      v-model:dialog-visible="addDialogVisible"
+      @add="handleAddWidget"
+    />
   </div>
 </template>
 
@@ -73,6 +80,7 @@ import { ElMessage } from "element-plus";
 import { generateUUID } from "@/utils";
 import { useAppStoreWithOut } from "@/store/modules/app";
 import AddWidget from "@/components/AddWidget/index.vue";
+import itabMaterials from "@/utils/itabMaterials";
 import type { IWidgetItem } from "#/config";
 
 const appStore = useAppStoreWithOut();
@@ -83,35 +91,28 @@ const addDialogVisible = ref<boolean>(false);
 const navConfig = computed(() => appStore.getNavConfig);
 const activeNav = computed(() => appStore.getActiveNav);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleGridItemClick(widget: IWidgetItem) {
-  addWidgetItem();
-  // console.info("🚀 ~ log:widget ----->", widget);
-  // const { type, url } = widget;
-  // if (url === "itab://add") {
-  //   addDialogVisible.value = true;
-  //   return;
-  // }
-  // if (type === "icon") {
-  //   window.open(url);
-  // }
+  const { type, url } = widget;
+  if (url === "itab://add") {
+    addDialogVisible.value = true;
+    return;
+  }
+  if (type === "icon") {
+    window.open(url);
+  }
 }
 
-function addWidgetItem() {
+function handleAddWidget(widget: IWidgetItem) {
+  console.info("🚀 ~ log:widget ----->", widget);
   const node: IWidgetItem = {
+    ...widget,
     id: generateUUID(),
-    name: "",
-    type: "component",
-    size: "",
-    component: "",
     x: 0,
     y: 0,
-    w: 3,
-    h: 2,
+    w: +widget.size.split("x")[1],
+    h: +widget.size.split("x")[0],
   };
-  console.info("🚀 ~ log:activeNav.value ----->", activeNav.value);
   activeNav.value?.children.push(node);
-  console.info("🚀 ~ log:navConfig.value ----->", navConfig.value);
   const { id: activeNavId } = activeNav.value;
   const grid = grids.value.find((it) => it.el?.dataset.id === activeNavId);
   nextTick(() => {
@@ -122,7 +123,7 @@ function addWidgetItem() {
 onMounted(() => {
   nextTick(() => {
     grids.value = GridStack.initAll({
-      float: false, 
+      float: false,
       cellHeight: "90px",
       minRow: 1,
     });
