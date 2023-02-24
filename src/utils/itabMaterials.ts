@@ -1,18 +1,14 @@
 import type { IWidget, IWidgetCategory, IWidgetComponent } from "#/config";
 
-type MaterialsMapType = Map<string, IWidgetComponent>;
+export type MaterialsMapType = Map<string, IWidgetComponent>;
 
-type CategorySetType = Set<IWidget>;
+export type CategorySetType = Set<IWidget>;
 
-type CategoryMapType = Map<IWidgetCategory, CategorySetType>;
+export type CategoryMapType = Map<IWidgetCategory, CategorySetType>;
 
 class MaterialsWarehouse {
-  MaterialsMap: MaterialsMapType;
-  CategoryMap: CategoryMapType;
-  constructor() {
-    this.MaterialsMap = new Map();
-    this.CategoryMap = new Map();
-  }
+  MaterialsMap: MaterialsMapType = new Map();
+  CategoryMap: CategoryMapType = new Map();
 
   //读取
   getMaterials(
@@ -51,7 +47,7 @@ class MaterialsWarehouse {
       widget && this.addMaterial(widget);
     });
   }
-  async cherryPickCategory(categoryArray: IWidget[]) {
+  cherryPickCategory(categoryArray: IWidget[]) {
     if (!Array.isArray(categoryArray)) {
       throw new TypeError(
         "cherryPickCategory 方法的参数错误，请传入类型为数组的组件集"
@@ -66,9 +62,9 @@ class MaterialsWarehouse {
         const traverseKeys = Object.keys(widgets);
         for (const key of traverseKeys) {
           let widget: IWidgetComponent | null = widgets[key];
-          if (typeof widget === "function") {
-            const module = await widget();
-            widget = module.default;
+          if (Object.prototype.toString.call(widget) === "[object Module]") {
+            //@ts-ignore
+            widget = widget?.default || null;
           }
           if (!widget || typeof widget !== "object") {
             widget = null;

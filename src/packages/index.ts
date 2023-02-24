@@ -1,10 +1,11 @@
 import itabMaterials from "@/utils/itabMaterials";
+import type { MaterialsMapType } from "@/utils/itabMaterials";
 import type { App } from "vue";
 import type { IWidget } from "#/config";
 
 const modules = import.meta.glob("./**/index.ts", { eager: true });
-
 const wigetModules: IWidget[] = [];
+
 Object.keys(modules).forEach((path) => {
   const widgetCategory: IWidget = modules[path].default || null;
   //注册组件
@@ -14,10 +15,12 @@ Object.keys(modules).forEach((path) => {
   wigetModules.push(widgetCategory);
 });
 
+itabMaterials.cherryPickCategory(wigetModules);
+
 export default {
   install: async (app: App) => {
-    await itabMaterials.cherryPickCategory(wigetModules);
-    const Materials = itabMaterials.getMaterials();
+    const Materials: MaterialsMapType =
+      itabMaterials.getMaterials() as MaterialsMapType;
     for (const [name, widget] of Materials) {
       app.component(name, widget);
     }

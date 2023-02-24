@@ -6,5 +6,5 @@ export default {
   title: "element-plus的button组件",
   desc: "常用的操作按钮",
   label: "el-button",
-  widgets: import.meta.glob("./src/**/*.vue"),
+  widgets: import.meta.glob("./src/**/*.vue", { eager: true }),
 } as IWidget;
