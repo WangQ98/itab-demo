@@ -24,7 +24,7 @@ export interface IWidget {
   title: string;
   desc: string;
   label: string;
-  widgets: IWidgetItem[];
+  widgets: IWidgetComponent[];
 }
 
 export interface IWidgetItem {

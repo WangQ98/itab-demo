@@ -1,18 +1,22 @@
 import type { IWidget, IWidgetCategory, IWidgetComponent } from "#/config";
 
 class MaterialsWarehouse {
+  MaterialsMap: Map<string, IWidgetComponent>;
+  CategoryMap: Map<IWidgetCategory, Set<IWidget>>;
   constructor() {
-    this.MaterialsMap = new Map() as Recordable<IWidgetComponent>;
-    this.CategoryMap = new Map() as Recordable<IWidget>;
+    this.MaterialsMap = new Map();
+    this.CategoryMap = new Map();
   }
 
   //读取
   getMaterials(
     category?: IWidgetCategory
-  ): Recordable<IWidget> | Recordable<IWidgetComponent> {
+  ):
+    | Set<IWidget>
+    | Map<IWidgetCategory, Set<IWidget>>
+    | Map<string, IWidgetComponent> {
     if (category) {
-      const categoryArray: Recordable<IWidget> = this.CategoryMap.get(category);
-      return categoryArray;
+      return this.CategoryMap.get(category) || this.CategoryMap;
     }
     return this.MaterialsMap;
   }
@@ -55,10 +59,11 @@ class MaterialsWarehouse {
       if (Array.isArray(widgets)) {
         this.batchMaterial(widgets);
       } else if (typeof widgets === "object") {
-        const Material = [];
+        const Material: IWidgetComponent[] = [];
         const traverseKeys = Object.keys(widgets);
         for (const key of traverseKeys) {
-          let widget = widgets[key];
+          let widget: IWidgetComponent | (() => IWidgetComponent) | null =
+            widgets[key];
           if (typeof widget === "function") {
             const module = await widget();
             widget = module.default;
@@ -66,17 +71,17 @@ class MaterialsWarehouse {
           if (!widget || typeof widget !== "object") {
             widget = null;
           }
-          Material.push(widget);
+          widget && Material.push(widget);
         }
         this.batchMaterial(Material);
         categoryItem.widgets = Material;
       }
       if (!this.CategoryMap.has(category)) {
-        const newScope = new Set();
+        const newScope: Set<IWidget> = new Set();
         newScope.add(categoryItem);
         this.CategoryMap.set(category, newScope);
       } else {
-        const existScope = this.CategoryMap.get(category);
+        const existScope = this.CategoryMap.get(category) as Set<IWidget>;
         existScope.add(categoryItem);
       }
     }
