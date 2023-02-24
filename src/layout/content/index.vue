@@ -53,10 +53,7 @@
                           src="../../assets/test.jpg"
                           alt=""
                         /> -->
-                        <component
-                          :is="itabMaterials.queryMaterial(it.name)"
-                          :key="it.id"
-                        />
+                        <component :is="it.component" :key="it.id" />
                       </div>
                     </div>
                   </template>
@@ -80,7 +77,6 @@ import { ElMessage } from "element-plus";
 import { generateUUID } from "@/utils";
 import { useAppStoreWithOut } from "@/store/modules/app";
 import AddWidget from "@/components/AddWidget/index.vue";
-import itabMaterials from "@/utils/itabMaterials";
 import type { IWidgetItem } from "#/config";
 
 const appStore = useAppStoreWithOut();
@@ -92,6 +88,8 @@ const navConfig = computed(() => appStore.getNavConfig);
 const activeNav = computed(() => appStore.getActiveNav);
 
 function handleGridItemClick(widget: IWidgetItem) {
+  // addWidgetItem();
+  console.info("🚀 ~ log:widget ----->", widget);
   const { type, url } = widget;
   if (url === "itab://add") {
     addDialogVisible.value = true;

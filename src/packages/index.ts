@@ -15,4 +15,12 @@ Object.keys(modules).forEach((path) => {
   wigetModules.push(widgetCategory);
 });
 
-itabMaterials.cherryPickCategory(wigetModules);
+export default {
+  install: async (app) => {
+    await itabMaterials.cherryPickCategory(wigetModules);
+    const Materials = itabMaterials.getMaterials();
+    for (const [name, widget] of Materials) {
+      app.component(name, widget);
+    }
+  },
+};

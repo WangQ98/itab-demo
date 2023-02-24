@@ -1,27 +1,26 @@
-import { generateUid } from "@/utils";
-import type { IWidget, IWidgetCategory, IWidgetItem } from "#/config";
+import type { IWidget, IWidgetCategory, IWidgetComponent } from "#/config";
 
 class MaterialsWarehouse {
   constructor() {
-    this.MaterialsMap = new Map() as Recordable<IWidgetItem>;
+    this.MaterialsMap = new Map() as Recordable<IWidgetComponent>;
     this.CategoryMap = new Map() as Recordable<IWidget>;
   }
 
   //读取
   getMaterials(
     category?: IWidgetCategory
-  ): Recordable<IWidget> | Recordable<IWidgetItem> {
+  ): Recordable<IWidget> | Recordable<IWidgetComponent> {
     if (category) {
       const categoryArray: Recordable<IWidget> = this.CategoryMap.get(category);
       return categoryArray;
     }
     return this.MaterialsMap;
   }
-  queryMaterial(name: string): IWidgetItem | null {
+  queryMaterial(name: string): IWidgetComponent | null {
     return this.MaterialsMap.get(name) || null;
   }
   //操作
-  addMaterial(widget: IWidgetItem) {
+  addMaterial(widget: IWidgetComponent) {
     const { name = "" } = widget || {};
     const existWideget = this.MaterialsMap.has(name)
       ? this.MaterialsMap.get(name)
@@ -35,23 +34,23 @@ class MaterialsWarehouse {
       this.MaterialsMap.set(name, widget);
     }
   }
-  batchMaterial(widgets: IWidgetItem[]) {
+  batchMaterial(widgets: IWidgetComponent[]) {
     if (!Array.isArray(widgets)) {
       throw new TypeError(
         "batchMaterial 方法的参数错误，请传入类型为数组的组件集"
       );
     }
-    widgets?.forEach((widget: IWidgetItem) => {
+    widgets?.forEach((widget: IWidgetComponent) => {
       widget && this.addMaterial(widget);
     });
   }
-  cherryPickCategory(categoryArray: IWidget[]) {
+  async cherryPickCategory(categoryArray: IWidget[]) {
     if (!Array.isArray(categoryArray)) {
       throw new TypeError(
         "cherryPickCategory 方法的参数错误，请传入类型为数组的组件集"
       );
     }
-    categoryArray?.forEach(async (categoryItem: IWidget) => {
+    for (const categoryItem of categoryArray || []) {
       const { category, widgets = [] } = categoryItem;
       if (Array.isArray(widgets)) {
         this.batchMaterial(widgets);
@@ -80,7 +79,7 @@ class MaterialsWarehouse {
         const existScope = this.CategoryMap.get(category);
         existScope.add(categoryItem);
       }
-    });
+    }
   }
 }
 

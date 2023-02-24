@@ -39,25 +39,31 @@
 
 <script setup lang="ts">
 import SizeBox from "./sizeBox.vue";
-import type { IWidget, IWidgetItem } from "#/config";
+import type { IWidget, IWidgetComponent } from "#/config";
 const props = defineProps<{
   categoryWidget: IWidget;
 }>();
 
-const $emit = defineEmits(["append-widget"]);
+const $emit = defineEmits<{
+  (
+    event: "append-widget",
+    widget: IWidgetComponent | null,
+    label: string
+  ): void;
+}>();
 
-const widgets = computed<IWidgetItem[]>(
+const widgets = computed<IWidgetComponent[]>(
   () => props.categoryWidget?.widgets || []
 );
 
-const activeWidget = ref<IWidgetItem | null>(widgets.value?.[0] || null);
+const activeWidget = ref<IWidgetComponent | null>(widgets.value?.[0] || null);
 
 function changeCarousel(activeIdx: number) {
   activeWidget.value = widgets.value?.[activeIdx] || null;
 }
 
 function appendWidget() {
-  $emit("append-widget", activeWidget.value);
+  $emit("append-widget", activeWidget.value, props.categoryWidget?.label);
 }
 </script>
 

@@ -6,7 +6,7 @@ import "element-plus/theme-chalk/index.css";
 
 import { createApp } from "vue";
 import ElementPlus from "element-plus";
-import "@/packages";
+import Packages from "@/packages";
 import App from "./App.vue";
 
 import { setupRouter } from "./router";
@@ -24,6 +24,8 @@ import "./unocss-icon";
   setupGlobDirectives(app);
 
   app.use(ElementPlus);
+
+  app.use(Packages);
 
   app.mount("#app");
 })();

@@ -5,12 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import type { IWidgetItem, IWidgetSize } from "#/config";
+import { IconSize } from "@/enums";
+import type { IWidgetComponent, IWidgetSize } from "#/config";
 const props = defineProps<{
-  widget: IWidgetItem;
+  widget: IWidgetComponent;
 }>();
 
-const widget = computed<IWidgetItem | null>(() => props.widget || null);
+const widget = computed<IWidgetComponent | null>(() => props.widget || null);
 
 const containerBox = ref({
   "--size-x": 1,
@@ -18,7 +19,7 @@ const containerBox = ref({
 });
 
 watchEffect(() => {
-  widget.value && generateSize(widget.value.size);
+  widget.value && generateSize(widget.value?.size || IconSize.s1x1);
 });
 
 function generateSize(size: IWidgetSize) {

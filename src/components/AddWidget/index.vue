@@ -43,13 +43,21 @@
 </template>
 
 <script setup lang="ts">
+import { generateUUID } from "@/utils";
 import itabMaterials from "@/utils/itabMaterials";
 import { IconCategory } from "@/enums";
 import CarouselBox from "../containerBox/carouselBox.vue";
-import type { IWidget, IWidgetCategory, IWidgetItem } from "#/config";
+import type {
+  IWidget,
+  IWidgetCategory,
+  IWidgetComponent,
+  IWidgetItem,
+} from "#/config";
 const props = defineProps<{
   dialogVisible: boolean;
 }>();
+
+const { proxy } = getCurrentInstance();
 
 const emits = defineEmits<{
   (event: "update:dialogVisible", value: boolean): void;
@@ -65,12 +73,28 @@ function mapIWidgetCategory(): IWidget[] {
   return [...categorySet];
 }
 
-function appendWidget(widget: IWidgetItem) {
-  emits("add", widget);
+function appendWidget(widget: IWidgetComponent | null, label: string) {
+  emits("add", widgetFactory(widget, label));
 }
 
 function switchTag(category: IWidgetCategory) {
   categoryValue.value = category;
+}
+
+function widgetFactory(
+  widget: IWidgetComponent | null,
+  label: string
+): IWidgetItem {
+  if (!widget) {
+    return proxy?.$message.error("当前组件为null");
+  }
+  return {
+    id: generateUUID(),
+    name: label,
+    component: widget.name || null,
+    size: widget.size,
+    type: widget.type,
+  };
 }
 </script>
 

@@ -1,3 +1,4 @@
+import type { Component } from "vue";
 import type { IconCategory, IconSize, IconType } from "@/enums";
 
 type IWidgetSize = keyof typeof IconSize;
@@ -5,6 +6,11 @@ type IWidgetSize = keyof typeof IconSize;
 type IWidgetType = keyof typeof IconType;
 
 type IWidgetCategory = keyof typeof IconCategory;
+
+export type IWidgetComponent = {
+  size: IWidgetSize;
+  type: IconType;
+} & Component;
 
 export interface INavConfig {
   id: string;
@@ -17,6 +23,7 @@ export interface IWidget {
   category: IWidgetCategory;
   title: string;
   desc: string;
+  label: string;
   widgets: IWidgetItem[];
 }
 
@@ -25,7 +32,7 @@ export interface IWidgetItem {
   name: string;
   size: IWidgetSize;
   type: IWidgetType;
-  component: string;
+  component: string | null;
   backgroundColor?: string;
   src?: string;
   url?: string;
