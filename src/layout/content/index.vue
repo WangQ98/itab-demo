@@ -74,7 +74,6 @@
 <script setup lang="ts">
 import { GridStack } from "gridstack";
 import { ElMessage } from "element-plus";
-import { generateUUID } from "@/utils";
 import { useAppStoreWithOut } from "@/store/modules/app";
 import AddWidget from "@/components/AddWidget/index.vue";
 import type { IWidgetItem } from "#/config";
