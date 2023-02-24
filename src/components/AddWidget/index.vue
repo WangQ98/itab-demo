@@ -6,26 +6,31 @@
     :append-to-body="true"
   >
     <div class="h-[550px]">
-      <section class="flex h-full gap-[12px]">
-        <aside class="w-80 h-full bg-white">
-          <ul>
-            <li>小组件</li>
-            <li>网址导航</li>
-            <li>自定义图标</li>
-          </ul>
+      <section class="flex h-full">
+        <aside class="w-50 h-full bg-white pt-[60px]">
+          <div class="p-[10px]">
+            <ul class="aside-list">
+              <li>小组件</li>
+              <li>网址导航</li>
+              <li>自定义图标</li>
+            </ul>
+          </div>
         </aside>
-        <main class="flex-1 bg-[#f1f0f5]">
-          <div class="flex w-full py-2 gap-2">
-            <el-tag
+        <main class="flex-1 bg-[#f1f0f5] px-[10px]">
+          <div class="flex w-full py-2 gap-2" />
+          <ul class="category-wrap flex">
+            <li
               v-for="category in IconCategory"
               :key="category"
-              class="cursor-pointer"
+              class="mr-[12px]"
               @click="switchTag(category)"
             >
-              {{ category }}
-            </el-tag>
-          </div>
-          <div class="widget-list-wrap grid grid-cols-2 gap-4 mt-10">
+              <el-tag class="cursor-pointer" round>
+                {{ category }}
+              </el-tag>
+            </li>
+          </ul>
+          <div class="widget-list-wrap grid grid-cols-2 gap-4">
             <template
               v-for="(categoryWidget, idx) in mapIWidgetCategory()"
               :key="idx"
@@ -100,6 +105,8 @@ function widgetFactory(
 
 <style lang="less">
 .d-dialog-model {
+  border-radius: 6px;
+  overflow: auto;
   .el-dialog__header {
     position: absolute;
     left: 0;
@@ -114,5 +121,25 @@ function widgetFactory(
     padding: 0;
     background-color: #f1f0f5;
   }
+}
+.category-wrap {
+  white-space: nowrap;
+  overflow-y: auto;
+  list-style: none;
+  margin: 12px 0;
+}
+.aside-list {
+  cursor: pointer;
+  list-style: none;
+  li {
+    margin: 5px 0;
+    padding: 12px 1px;
+    &:hover {
+      color: @active-color;
+    }
+  }
+}
+.active {
+  color: @active-color;
 }
 </style>
