@@ -141,7 +141,15 @@ onMounted(() => {
 });
 
 function handleWidgetChange(event: any, changeItems: any[]) {
-  console.info("🚀 ~ 触发了change事件,改变位置的元素为 ----->", changeItems);
+  console.info("🚀 ~ log:changeItems ----->", changeItems);
+  for (const item of changeItems) {
+    const { id, x, y } = item;
+    const widget = activeNav.value?.children.find((it) => it.id === id);
+    if (widget) {
+      widget.x = x;
+      widget.y = y;
+    }
+  }
 }
 
 onUnmounted(() => {
