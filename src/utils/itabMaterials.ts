@@ -1,12 +1,8 @@
 import type { IWidget, IWidgetCategory, IWidgetComponent } from "#/config";
 
 class MaterialsWarehouse {
-  MaterialsMap: Map<string, IWidgetComponent>;
-  CategoryMap: Map<IWidgetCategory, Set<IWidget>>;
-  constructor() {
-    this.MaterialsMap = new Map();
-    this.CategoryMap = new Map();
-  }
+  MaterialsMap: Map<string, IWidgetComponent> = new Map();
+  CategoryMap: Map<IWidgetCategory, Set<IWidget>> = new Map();
 
   //读取
   getMaterials(
@@ -65,6 +61,7 @@ class MaterialsWarehouse {
           let widget: IWidgetComponent | (() => IWidgetComponent) | null =
             widgets[key];
           if (typeof widget === "function") {
+            // @ts-ignore
             const module = await widget();
             widget = module.default;
           }

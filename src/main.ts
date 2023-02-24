@@ -14,7 +14,7 @@ import { setupStore } from "./store";
 import { setupGlobDirectives } from "./directives";
 import "./unocss-icon";
 
-(() => {
+(async () => {
   const app = createApp(App);
 
   app.use(Packages);
