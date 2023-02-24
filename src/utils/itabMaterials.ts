@@ -1,8 +1,14 @@
 import type { IWidget, IWidgetCategory, IWidgetComponent } from "#/config";
 
+type MaterialsMapType = Map<string, IWidgetComponent>;
+
+type CategorySetType = Set<IWidget>;
+
+type CategoryMapType = Map<IWidgetCategory, CategorySetType>;
+
 class MaterialsWarehouse {
-  MaterialsMap: Map<string, IWidgetComponent>;
-  CategoryMap: Map<IWidgetCategory, Set<IWidget>>;
+  MaterialsMap: MaterialsMapType;
+  CategoryMap: CategoryMapType;
   constructor() {
     this.MaterialsMap = new Map();
     this.CategoryMap = new Map();
@@ -11,10 +17,7 @@ class MaterialsWarehouse {
   //读取
   getMaterials(
     category?: IWidgetCategory
-  ):
-    | Set<IWidget>
-    | Map<IWidgetCategory, Set<IWidget>>
-    | Map<string, IWidgetComponent> {
+  ): CategorySetType | CategoryMapType | MaterialsMapType {
     if (category) {
       return this.CategoryMap.get(category) || this.CategoryMap;
     }
@@ -62,8 +65,7 @@ class MaterialsWarehouse {
         const Material: IWidgetComponent[] = [];
         const traverseKeys = Object.keys(widgets);
         for (const key of traverseKeys) {
-          let widget: IWidgetComponent | (() => IWidgetComponent) | null =
-            widgets[key];
+          let widget: IWidgetComponent | null = widgets[key];
           if (typeof widget === "function") {
             const module = await widget();
             widget = module.default;
@@ -81,7 +83,7 @@ class MaterialsWarehouse {
         newScope.add(categoryItem);
         this.CategoryMap.set(category, newScope);
       } else {
-        const existScope = this.CategoryMap.get(category) as Set<IWidget>;
+        const existScope = this.CategoryMap.get(category) as CategorySetType;
         existScope.add(categoryItem);
       }
     }
