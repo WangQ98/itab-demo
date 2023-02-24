@@ -15,11 +15,12 @@
           </ul>
         </aside>
         <main class="flex-1 bg-[#f1f0f5]">
-          <div>
+          <div class="flex w-full py-2 gap-2">
             <el-tag
               v-for="category in IconCategory"
               :key="category"
-              class="ml-2"
+              class="cursor-pointer"
+              @click="switchTag(category)"
             >
               {{ category }}
             </el-tag>
@@ -45,7 +46,7 @@
 import itabMaterials from "@/utils/itabMaterials";
 import { IconCategory } from "@/enums";
 import CarouselBox from "../containerBox/carouselBox.vue";
-import type { IWidget, IWidgetCategory } from "#/config";
+import type { IWidget, IWidgetCategory, IWidgetItem } from "#/config";
 const props = defineProps<{
   dialogVisible: boolean;
 }>();
@@ -63,8 +64,12 @@ function mapIWidgetCategory(): IWidget[] {
   return [...categorySet];
 }
 
-function appendWidget(widget) {
+function appendWidget(widget: IWidgetItem) {
   console.log(widget);
+}
+
+function switchTag(category: IWidgetCategory) {
+  categoryValue.value = category;
 }
 </script>
 
