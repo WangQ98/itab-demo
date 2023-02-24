@@ -17,6 +17,8 @@ import "./unocss-icon";
 (() => {
   const app = createApp(App);
 
+  app.use(Packages);
+
   setupRouter(app);
 
   setupStore(app);
@@ -24,8 +26,6 @@ import "./unocss-icon";
   setupGlobDirectives(app);
 
   app.use(ElementPlus);
-
-  app.use(Packages);
 
   app.mount("#app");
 })();

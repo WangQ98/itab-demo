@@ -1,3 +1,5 @@
+import type { INavConfig } from "#/config";
+
 export const navList = [
   {
     id: "1",
@@ -1255,4 +1257,4 @@ export const navList = [
       },
     ],
   },
-];
+] as INavConfig[];

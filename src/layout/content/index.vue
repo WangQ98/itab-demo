@@ -45,7 +45,7 @@
                       :gs-id="it.id"
                     >
                       <div
-                        class="grid-stack-item-content flex flex-col items-center bg-pink-400"
+                        class="grid-stack-item-content flex flex-col items-center bg-[rgba(0,0,0,0.3)]"
                       >
                         <!-- <img
                           style="border-radius: 16px"
@@ -104,7 +104,6 @@ function handleAddWidget(widget: IWidgetItem) {
   console.info("🚀 ~ log:widget ----->", widget);
   const node: IWidgetItem = {
     ...widget,
-    id: generateUUID(),
     x: 0,
     y: 0,
     w: +widget.size.split("x")[1],
@@ -121,7 +120,6 @@ function handleAddWidget(widget: IWidgetItem) {
 onMounted(() => {
   nextTick(() => {
     grids.value = GridStack.initAll({
-      float: false,
       cellHeight: "90px",
       minRow: 1,
     });
