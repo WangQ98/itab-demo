@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import SizeBox from "./sizeBox.vue";
+import type { Ref } from "vue";
 import type { IWidget, IWidgetComponent } from "#/config";
 const props = defineProps<{
   categoryWidget: IWidget;
@@ -52,9 +53,9 @@ const $emit = defineEmits<{
   ): void;
 }>();
 
-const widgets = computed<IWidgetComponent[]>(
-  () => props.categoryWidget?.widgets || []
-);
+const widgets = computed(() => props.categoryWidget?.widgets || []) as Ref<
+  IWidgetComponent[]
+>;
 
 const activeWidget = ref<IWidgetComponent | null>(widgets.value?.[0] || null);
 
