@@ -8,6 +8,16 @@ interface AppState {
   activeNav: INavConfig;
 }
 
+// function getNavData(): INavConfig[] {
+//   const localData = sessionStorage.getItem("navConfig");
+//   if (localData && localData.length > 0) {
+//     return JSON.parse(localData);
+//   }
+//   return navList;
+// }
+
+// const navConfig = getNavData();
+
 export const useAppStore = defineStore({
   id: "app",
   state: (): AppState => ({
@@ -15,12 +25,8 @@ export const useAppStore = defineStore({
     activeNav: navList[0],
   }),
   getters: {
-    getNavConfig() {
-      return this.navConfig;
-    },
-    getActiveNav() {
-      return this.activeNav;
-    },
+    getNavConfig: (state) => state.navConfig,
+    getActiveNav: (state) => state.activeNav,
   },
   actions: {
     setActiveNav(nav: INavConfig) {

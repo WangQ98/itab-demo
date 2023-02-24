@@ -1,6 +1,20 @@
 <script setup lang="ts">
+// import { useAppStoreWithOut } from "@/store/modules/app";
 import SideBar from "./sidebar/index.vue";
 import GridContent from "./content/index.vue";
+
+// const appStore = useAppStoreWithOut();
+
+// function unLoadEffect() {
+//   sessionStorage.setItem("navConfig", JSON.stringify(appStore.getNavConfig));
+// }
+
+// onMounted(() => {
+//   window.addEventListener("beforeunload", unLoadEffect);
+// });
+// onUnmounted(() => {
+//   window.removeEventListener("beforeunload", unLoadEffect);
+// });
 </script>
 
 <template>
