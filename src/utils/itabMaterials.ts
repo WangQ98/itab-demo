@@ -25,15 +25,15 @@ class MaterialsWarehouse {
   //操作
   addMaterial(widget: IWidgetComponent) {
     const { name = "" } = widget || {};
-    const existWideget = this.MaterialsMap.has(name)
+    const existWidget = this.MaterialsMap.has(name)
       ? this.MaterialsMap.get(name)
       : null;
-    if (existWideget && existWideget !== widget) {
+    if (existWidget && existWidget !== widget) {
       console.error(
         `${name || widget?.toString()}组件已注册过，旧的${name}将被替换`
       );
       this.MaterialsMap.set(name, widget);
-    } else if (!existWideget) {
+    } else if (!existWidget) {
       this.MaterialsMap.set(name, widget);
     }
   }

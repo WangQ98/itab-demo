@@ -7,7 +7,7 @@ const modules = import.meta.glob("./**/index.ts", { eager: true });
 const wigetModules: IWidget[] = [];
 
 Object.keys(modules).forEach((path) => {
-  const widgetCategory: IWidget = modules[path].default || null;
+  const widgetCategory: IWidget = modules[path]?.default || null;
   //注册组件
   if (!widgetCategory) {
     console.error(`路径${path}的模块，默认导出default不存在`);
