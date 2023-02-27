@@ -53,4 +53,9 @@ export default defineConfig({
   test: {
     environment: "jsdom",
   },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, "src/build.ts"),
+    },
+  },
 });
