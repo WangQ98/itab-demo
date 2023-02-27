@@ -1,9 +1,14 @@
 import itabMaterials from "@/utils/itabMaterials";
 import type { MaterialsMapType } from "@/utils/itabMaterials";
-import type { App } from "vue";
+import type { App, DefineComponent } from "vue";
 import type { IWidget } from "#/config";
 
-const modules = import.meta.glob("./**/index.ts", { eager: true });
+const modules: Record<string, DefineComponent> = import.meta.glob(
+  "./**/index.ts",
+  {
+    eager: true,
+  }
+);
 const wigetModules: IWidget[] = [];
 
 Object.keys(modules).forEach((path) => {
