@@ -13,7 +13,7 @@ class TabWallpaper extends HTMLElement {
 
     wrapper.style.setProperty(
       "background-image",
-      "url('https://dogefs.s3.ladydaily.com/~/source/wallhaven/full/pk/wallhaven-pkr8l9.jpg?w=2560&h=1440&fmt=webp')"
+      "url('https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1675620705848-bcab2d4d98a4?ixid=MnwxMjA3fDB8MXx0b3BpY3x8NnNNVmpUTFNrZVF8fHx8fDJ8fDE2NzcxMzUzMzI&ixlib=rb-4.0.3&w=2560&h=1440&fmt=webp')"
     );
 
     const style = document.createElement("style");
