@@ -44,7 +44,7 @@ watch(
   searchValue,
   debounce(() => {
     showCloseButtonFlag.value = !!searchValue.value;
-  }, 500)
+  }, 300)
 );
 
 function search() {

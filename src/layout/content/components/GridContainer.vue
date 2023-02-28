@@ -26,6 +26,7 @@
                           class="app-item-img"
                           :style="getIconStyle(it)"
                           :src="it.src"
+                          @click="handleIconClick"
                         />
                       </div>
                       <p
@@ -96,6 +97,10 @@ function getIconStyle(it: IWidgetItem) {
   } else {
     return {};
   }
+}
+
+function handleIconClick(it: IWidgetItem) {
+  window.open(it.url, "_blank");
 }
 
 defineExpose({
