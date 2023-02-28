@@ -26,7 +26,7 @@
                           class="app-item-img"
                           :style="getIconStyle(it)"
                           :src="it.src"
-                          @click="handleIconClick"
+                          @click="handleIconClick(it)"
                         />
                       </div>
                       <p
