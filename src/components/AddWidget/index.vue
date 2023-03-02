@@ -16,7 +16,7 @@
             </ul>
           </div>
         </aside>
-        <main class="flex-1 bg-[#f1f0f5] px-[10px]">
+        <main class="flex-1 bg-[#f1f0f5] px-[10px] overflow-scroll">
           <div class="flex w-full py-2 gap-2" />
           <ul class="category-wrap flex">
             <li

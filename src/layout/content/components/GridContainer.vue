@@ -47,7 +47,7 @@
                     :gs-id="it.id"
                   >
                     <div
-                      class="grid-stack-item-content flex flex-col items-center"
+                      class="grid-stack-item-content flex flex-col items-center px-4"
                     >
                       <!-- <img
                           style="border-radius: 16px"
@@ -58,7 +58,7 @@
                       <component
                         :is="it.component"
                         :key="it.id"
-                        class="bg-[rgba(0,0,0,0.3)]"
+                        class="bg-[rgba(0,0,0,0.3)] rounded-[16px]"
                       />
                       <p class="text-white-sm text-sm text-center pt-[8px]">
                         {{ it.name }}

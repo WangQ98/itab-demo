@@ -6,5 +6,5 @@ export default {
   title: "element-plus的input组件",
   desc: "常用的输入框",
   label: "el-input",
-  widgets: import.meta.glob("./**/*.vue", { eager: true }),
+  widgets: import.meta.glob("./src/*.vue", { eager: true }),
 } as IWidget;
