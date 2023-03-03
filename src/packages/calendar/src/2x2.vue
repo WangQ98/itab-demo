@@ -11,14 +11,10 @@
 </template>
 
 <script lang="ts" setup>
-import dayjs from "dayjs";
-import { getNowDateFormattedChineseDate } from "@/utils/date";
 import { IconSize, IconType } from "@/enums";
+import useDate from "./useDate";
 
-const yearMonth = dayjs().format("YYYY年MM月");
-const currentDay = dayjs().format("DD");
-
-const currentDateString = getNowDateFormattedChineseDate();
+const { yearMonth, currentDay, currentDateString } = useDate();
 
 defineOptions({
   name: "Calender2x2",
