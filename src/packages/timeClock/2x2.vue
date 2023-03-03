@@ -3,7 +3,7 @@
     class="w-full h-full !bg-[#111] flex flex-col items-center justify-center color-[#fff]"
     @click.stop="dialogVisible = true"
   >
-    <span class="text-6xl">
+    <span class="text-4xl">
       {{ currentTime }}
     </span>
     <p class="flex mt-4 items-center gap-2">
@@ -35,7 +35,7 @@ const timeStamp = ref(0);
 
 onMounted(() => {
   timeStamp.value = window?.setInterval(() => {
-    currentTime.value = getFormatDate("HH:mm:ss");
+    currentTime.value = getFormatDate("HH:mm");
   }, 1000);
 });
 onUnmounted(() => {
@@ -43,8 +43,8 @@ onUnmounted(() => {
 });
 
 defineOptions({
-  name: "worldTime2x4",
-  size: IconSize.s2x4,
+  name: "worldTime2x2",
+  size: IconSize.s2x2,
   type: IconType.component,
 });
 </script>

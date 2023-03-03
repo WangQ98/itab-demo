@@ -88,6 +88,16 @@ const { yearMonth, currentDay, currentDateString } = useDate();
 // 今天的日期
 const today = getFormatDate("D");
 
+const nextMonthDaysMaps = function () {
+  const map = new Map();
+
+  nextMonthDays.forEach((it, id) => {
+    map.set(it, id);
+  });
+};
+
+nextMonthDaysMaps();
+
 defineOptions({
   name: "Calender2x4",
   size: IconSize.s2x4,

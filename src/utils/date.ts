@@ -2,8 +2,6 @@ import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import localeData from "dayjs/plugin/localeData";
-import dayOfYear from "dayjs/plugin/dayOfYear";
-import weekOfYear from "dayjs/plugin/weekOfYear";
 import "dayjs/locale/zh-cn";
 
 dayjs.locale("zh-cn");
@@ -95,6 +93,15 @@ export function getWeekdayDates(): number[] {
     }
   }
   return dates;
+}
+
+/**
+ * @description: 获取日期是星期几
+ * @return {string} 周三
+ */
+export function getDayOfWeek(date: Date = new Date()): string {
+  const weekdaysShort = dayjs.localeData().weekdaysShort();
+  return weekdaysShort[dayjs(date).day()];
 }
 
 /**
