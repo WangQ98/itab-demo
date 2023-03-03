@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import weekday from "dayjs/plugin/weekday";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import localeData from "dayjs/plugin/localeData";
+import dayOfYear from "dayjs/plugin/dayOfYear";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 import "dayjs/locale/zh-cn";
 
 dayjs.locale("zh-cn");
@@ -45,6 +47,8 @@ const cnDayNums = [
   "廿九",
   "三十",
 ];
+
+export default dayjs;
 
 /**
  * @description: 获取指定日期的格式
