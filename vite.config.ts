@@ -3,7 +3,9 @@
 import path from "node:path";
 import { defineConfig } from "vite";
 import Vue from "@vitejs/plugin-vue";
+import VueJsx from "@vitejs/plugin-vue-jsx";
 import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import AutoImport from "unplugin-auto-import/vite";
 import Unocss from "unocss/vite";
 import VueMacros from "unplugin-vue-macros/vite";
@@ -21,6 +23,7 @@ export default defineConfig({
         vue: Vue({
           reactivityTransform: true,
         }),
+        vueJsx: VueJsx(),
       },
     }),
 
@@ -35,6 +38,7 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: "types/components.d.ts",
+      resolvers: [ElementPlusResolver()],
     }),
 
     // https://github.com/antfu/unocss

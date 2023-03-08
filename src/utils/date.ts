@@ -120,7 +120,7 @@ export function getFirstDayOfWeek(): string {
 export function getDaysFromFirstDayToLastSunday(): number {
   const firstDay = dayjs().startOf("month"); // 当前月份第一天
   const lastSunday = dayjs().startOf("week").subtract(1, "day"); // 上个周日
-  return firstDay.diff(lastSunday, "day"); // 计算相差天数并加一
+  return lastSunday.diff(firstDay, "day"); // 计算相差天数并加一
 }
 
 /**

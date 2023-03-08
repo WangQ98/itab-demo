@@ -1,11 +1,11 @@
 <template>
   <div class="app-icon-grid">
-    <ul class="app-icon-wrap h-full">
+    <ul class="h-full app-icon-wrap">
       <template v-for="nav in navConfig" :key="nav.id">
         <transition name="fade">
           <li v-show="activeNav.id == nav.id" class="h-full">
             <main class="h-full">
-              <section class="grid-stack h-full" :data-id="nav.id">
+              <section class="h-full grid-stack" :data-id="nav.id">
                 <template v-for="it in nav.children" :key="it.id">
                   <div
                     v-if="it.type == 'icon'"
@@ -19,13 +19,13 @@
                     @click="emits('add', it)"
                   >
                     <div
-                      class="grid-stack-item-content h-full flex flex-col items-center"
+                      class="flex flex-col items-center h-full grid-stack-item-content"
                     >
                       <div class="app-item-icon">
                         <img
                           class="app-item-img"
                           :style="getIconStyle(it)"
-                          :src="it.src"
+                          :src="getAppIcon(it)"
                           @click="handleIconClick(it)"
                         />
                       </div>
@@ -47,19 +47,15 @@
                     :gs-id="it.id"
                   >
                     <div
-                      class="grid-stack-item-content flex flex-col items-center px-4"
+                      class="flex flex-col items-center px-4 grid-stack-item-content"
                     >
-                      <!-- <img
-                          style="border-radius: 16px"
-                          class="w-full h-full"
-                          src="../../assets/test.jpg"
-                          alt=""
-                        /> -->
-                      <component
-                        :is="it.component"
-                        :key="it.id"
-                        class="bg-[rgba(0,0,0,0.3)] rounded-[16px]"
-                      />
+                      <div class="w-full" style="height: calc(100% - 28px)">
+                        <component
+                          :is="it.component"
+                          :key="it.id"
+                          class="bg-[rgba(0,0,0,0.3)] rounded-[16px]"
+                        />
+                      </div>
                       <p class="text-white-sm text-sm text-center pt-[8px]">
                         {{ it.name }}
                       </p>
@@ -103,6 +99,16 @@ function handleIconClick(it: IWidgetItem) {
   window.open(it.url, "_blank");
 }
 
+function getAppIcon(it: IWidgetItem) {
+  if (!it.src) {
+    return;
+  }
+  if (it?.src.startsWith("http") || it?.src.startsWith("https")) {
+    return it.src;
+  }
+  return new URL(`../../../assets/images/app/${it.src}`, import.meta.url).href;
+}
+
 defineExpose({
   grids,
 });
@@ -110,7 +116,7 @@ defineExpose({
 
 <style lang="less" scoped>
 .app-icon-grid {
-  max-width: var(--icon-max-width, 1350px);
+  max-width: var(--icon-max-width, 1600px);
   margin: 0 auto;
   padding: 45px;
   height: 100%;

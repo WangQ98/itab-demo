@@ -17,12 +17,12 @@
           @change="changeCarousel"
         >
           <el-carousel-item v-for="widget in widgets" :key="widget.name">
-            <div class="w-full h-full flex items-center justify-center">
+            <div class="flex items-center justify-center w-full h-full">
               <SizeBox :widget="widget" />
             </div>
           </el-carousel-item>
         </el-carousel>
-        <div class="w-full flex justify-end">
+        <div class="flex justify-end w-full">
           <el-button
             type="primary"
             size="small"
@@ -38,9 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import SizeBox from "./sizeBox.vue";
+import SizeBox from "./SizeBox.vue";
 import type { Ref } from "vue";
 import type { IWidget, IWidgetComponent } from "#/config";
+
 const props = defineProps<{
   categoryWidget: IWidget;
 }>();

@@ -4,6 +4,7 @@ export enum IconSize {
   s2x1 = "2x1",
   s2x2 = "2x2",
   s2x4 = "2x4",
+  s4x6 = "4x6",
 }
 
 export enum IconType {

@@ -30,36 +30,37 @@
 }
 
 // =================================
-// ==============widgets==========
+// ==============gridstack==========
 // =================================
 
-.icon-size-1x1,.icon-size-mini {
-  width: calc(@icon-size + @icon-gap-y);
-  height: calc(@icon-size + @icon-gap-x)
-}
+.grid-stack > .grid-stack-item {
+  @gridstack-columns: 17;
 
-.icon-size-1x2 {
-  grid-column: span 2;
-  width: calc(@icon-size * 2 + @icon-gap-y * 2);
-  height: calc(@icon-size + @icon-gap-x)
-}
+  min-width: calc(100%/@gridstack-columns) !important;
 
-.icon-size-2x1 {
-  grid-row: span 2;
-  width: calc(@icon-size + @icon-gap-y);
-  height: calc(@icon-size * 2 + @icon-gap-x * 2)
-}
+  .loop-gridstack(@index) when (@index >= 0) {
+    @selector:~"&[gs-w='#{@index}']";
+    @{selector} {
+      width: percentage((1 / @gridstack-columns) * @index);
+    }
 
-.icon-size-2x2,.icon-size-small {
-  grid-column: span 2;
-  grid-row: span 2;
-  width: calc(@icon-size * 2 + @icon-gap-y * 2);
-  height: calc(@icon-size * 2 + @icon-gap-x * 2)
-}
+    @selector:~"&[gs-x='#{@index}']";
+    @{selector} {
+      left: percentage((1 / @gridstack-columns) * @index);
+    }
 
-.icon-size-2x4,.icon-size-medium {
-  grid-column: span 4;
-  grid-row: span 2;
-  width: calc(@icon-size * 4 + @icon-gap-y * 4);
-  height: calc(@icon-size * 2 + @icon-gap-x * 2)
+    @selector:~"&[gs-min-w='#{@index}']";
+    @{selector} {
+      min-width: percentage((1 / @gridstack-columns) * @index);
+    }
+
+    @selector:~"&[gs-max-w='#{@index}']";
+    @{selector} {
+      max-width: percentage((1 / @gridstack-columns) * @index);
+    }
+
+    .loop-gridstack(@index - 1);
+  }
+
+  .loop-gridstack(@gridstack-columns - 1);
 }

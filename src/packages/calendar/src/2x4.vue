@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full h-full bg-white">
-    <div class="w-[40%] h-full py-6 pl-6">
+    <div class="w-[40%] h-full py-4 pl-4">
       <div
         class="w-full h-full calendar-container rounded-[16px] shadow-md shadow-gray-300"
       >
@@ -8,7 +8,7 @@
           {{ yearMonth }}
         </div>
         <div class="text-4xl font-bold h-1/2 flex-center">{{ currentDay }}</div>
-        <div class="text-sm h-1/4 calendar-desc">
+        <div class="text-xs h-1/4 calendar-desc">
           <p>{{ currentDateString }}</p>
         </div>
       </div>

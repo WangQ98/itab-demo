@@ -1,8 +1,11 @@
 <template>
   <div class="app-icon-grid-wrap">
+    <Date />
     <Search />
     <GridContainer ref="containerRef" @add="handleGridItem" />
+
     <AddWidget
+      v-model="addDialogVisible"
       v-model:dialog-visible="addDialogVisible"
       @add="handleAddWidget"
     />
@@ -14,6 +17,8 @@ import { useAppStoreWithOut } from "@/store/modules/app";
 import AddWidget from "@/components/AddWidget/index.vue";
 import GridContainer from "./components/GridContainer.vue";
 import Search from "./components/Search.vue";
+import Date from "./components/Date.vue";
+
 import type { GridStack } from "gridstack";
 import type { IWidgetItem } from "#/config";
 

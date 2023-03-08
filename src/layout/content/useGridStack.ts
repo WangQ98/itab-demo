@@ -11,7 +11,7 @@ export default function useGridStack() {
   onMounted(() => {
     nextTick(() => {
       grids.value = GridStack.initAll({
-        cellHeight: "102px",
+        // cellHeight: "102px",
         minRow: 1,
       });
 
@@ -40,7 +40,11 @@ export default function useGridStack() {
   });
 
   function handleWidgetChange(event: any, changeItems: any[]) {
-    console.info("🚀 ~ log:changeItems ----->", changeItems);
+    console.info(
+      "🚀 ~ log:changeItems ----->",
+      changeItems,
+      activeNav.value.children
+    );
     for (const item of changeItems) {
       const { id, x, y } = item;
       const widget = activeNav.value?.children.find((it) => it.id === id);

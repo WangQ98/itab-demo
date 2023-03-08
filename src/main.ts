@@ -3,11 +3,8 @@ import "@unocss/reset/tailwind.css";
 import "gridstack/dist/gridstack.min.css";
 import "uno.css";
 import "element-plus/theme-chalk/index.css";
-// @ts-ignore
-import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 import { createApp } from "vue";
-import ElementPlus from "element-plus";
 import Packages from "@/packages";
 import App from "./App.vue";
 
@@ -26,10 +23,6 @@ import "./unocss-icon";
   setupStore(app);
 
   setupGlobDirectives(app);
-
-  app.use(ElementPlus, {
-    locale: zhCn,
-  });
 
   app.mount("#app");
 })();
