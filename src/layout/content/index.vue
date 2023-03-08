@@ -56,10 +56,18 @@ function handleAddWidget(widget: IWidgetItem) {
   );
   nextTick(() => {
     grid?.makeWidget(node.id);
-    const nav = activeNav.value?.children.find((it) => it.id === node.id);
-    const nd = grid?.engine?.nodes.find((it) => it.id === node.id);
-    nav!.x = nd?.x;
-    nav!.y = nd?.y;
+    // const nav = activeNav.value?.children.find((it) => it.id === node.id);
+    // const nd = grid?.engine?.nodes.find((it) => it.id === node.id);
+    // nav!.x = nd?.x;
+    // nav!.y = nd?.y;
+    for (const nav of activeNav.value.children) {
+      for (const it of grid?.engine?.nodes as any) {
+        if (nav.id === it.id) {
+          nav.x = it?.x;
+          nav.y = it?.y;
+        }
+      }
+    }
   });
 }
 </script>

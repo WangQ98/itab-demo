@@ -18,15 +18,6 @@ export default function useGridStack() {
       grids.value.forEach((grid) => {
         grid.enableResize(false);
 
-        for (const nav of activeNav.value.children) {
-          for (const it of grid.getGridItems()) {
-            if (nav.id === it.id) {
-              nav.x = it.gridstackNode?.x;
-              nav.y = it.gridstackNode?.y;
-            }
-          }
-        }
-
         grid.on("dragstop", (event: any, element: any) => {
           const node = element.gridstackNode;
           ElMessage({
