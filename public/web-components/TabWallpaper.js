@@ -11,10 +11,12 @@ class TabWallpaper extends HTMLElement {
     //   "linear-gradient(0deg, rgb(255, 154, 158) 0%, rgb(254, 207, 239) 99%, rgb(254, 207, 239) 100%)"
     // );
 
-    wrapper.style.setProperty(
-      "background-image",
-      "url('https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1675620705848-bcab2d4d98a4?ixid=MnwxMjA3fDB8MXx0b3BpY3x8NnNNVmpUTFNrZVF8fHx8fDJ8fDE2NzcxMzUzMzI&ixlib=rb-4.0.3&w=2560&h=1440&fmt=webp')"
-    );
+    // wrapper.style.setProperty(
+    //   "background-image",
+    //   "url('https://dogefs.s3.ladydaily.com/~/source/unsplash/photo-1675620705848-bcab2d4d98a4?ixid=MnwxMjA3fDB8MXx0b3BpY3x8NnNNVmpUTFNrZVF8fHx8fDJ8fDE2NzcxMzUzMzI&ixlib=rb-4.0.3&w=2560&h=1440&fmt=webp')"
+    // );
+
+    wrapper.style.setProperty("background-image","url('/bg.png')" );
 
     const style = document.createElement("style");
 

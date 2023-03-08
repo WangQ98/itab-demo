@@ -49,7 +49,7 @@
                     <div
                       class="flex flex-col items-center px-4 grid-stack-item-content"
                     >
-                      <div class="w-full" style="height: calc(100% - 28px)">
+                      <div class="w-full" style="height: calc(100% - 40px)">
                         <component
                           :is="it.component"
                           :key="it.id"
@@ -106,7 +106,7 @@ function getAppIcon(it: IWidgetItem) {
   if (it?.src.startsWith("http") || it?.src.startsWith("https")) {
     return it.src;
   }
-  return new URL(`../../../assets/images/app/${it.src}`, import.meta.url).href;
+  return new URL(`../../../assets/images/${it.src}`, import.meta.url).href;
 }
 
 defineExpose({

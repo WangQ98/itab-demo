@@ -18,11 +18,11 @@
     </div>
     <div class="f-dialog-body" :style="{ height }">
       <el-container class="f-layout">
-        <el-aside width="200px" class="h-full">
+        <el-aside width="160px" class="h-full">
           <slot name="aside" />
         </el-aside>
         <el-main
-          style="overflow: scroll; padding: 0px; background-color: #f1f0f5"
+          style="overflow: scroll; padding: 0px; background-color: #171819"
         >
           <slot name="main" />
         </el-main>
@@ -63,7 +63,7 @@ const isFullScreen = ref<boolean>(false);
   }
   .el-dialog__body {
     padding: 0;
-    background-color: #f0f1f4;
+    background-color: #171819;
   }
   .f-dialog-body {
     height: 600px;

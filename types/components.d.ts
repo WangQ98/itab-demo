@@ -12,9 +12,11 @@ declare module '@vue/runtime-core' {
     AddWidget: typeof import('./../src/components/AddWidget/index.vue')['default']
     CarouselBox: typeof import('./../src/components/containerBox/carouselBox.vue')['default']
     ContainerBox: typeof import('./../src/components/ContainerBox/index.vue')['default']
+    CustomIcon: typeof import('./../src/components/AddWidget/components/CustomIcon.vue')['default']
     Dialog: typeof import('./../src/components/Dialog/src/Dialog.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
@@ -27,5 +29,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SizeBox: typeof import('./../src/components/ContainerBox/SizeBox.vue')['default']
+    UrlNavigation: typeof import('./../src/components/AddWidget/components/UrlNavigation.vue')['default']
+    Widget: typeof import('./../src/components/AddWidget/components/Widget.vue')['default']
+    Widgets: typeof import('../src/components/AddWidget/components/Widget.vue')['default']
   }
 }

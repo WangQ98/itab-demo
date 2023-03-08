@@ -37,6 +37,7 @@ export interface IWidgetItem {
   src?: string;
   url?: string;
   view?: string;
+  desc?: string;
   x?: number;
   y?: number;
   w?: number;

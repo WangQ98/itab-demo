@@ -11,12 +11,21 @@ export default function useGridStack() {
   onMounted(() => {
     nextTick(() => {
       grids.value = GridStack.initAll({
-        // cellHeight: "102px",
+        cellHeight: "100px",
         minRow: 1,
       });
 
       grids.value.forEach((grid) => {
         grid.enableResize(false);
+
+        for (const nav of activeNav.value.children) {
+          for (const it of grid.getGridItems()) {
+            if (nav.id === it.id) {
+              nav.x = it.gridstackNode?.x;
+              nav.y = it.gridstackNode?.y;
+            }
+          }
+        }
 
         grid.on("dragstop", (event: any, element: any) => {
           const node = element.gridstackNode;
@@ -40,11 +49,6 @@ export default function useGridStack() {
   });
 
   function handleWidgetChange(event: any, changeItems: any[]) {
-    console.info(
-      "🚀 ~ log:changeItems ----->",
-      changeItems,
-      activeNav.value.children
-    );
     for (const item of changeItems) {
       const { id, x, y } = item;
       const widget = activeNav.value?.children.find((it) => it.id === id);

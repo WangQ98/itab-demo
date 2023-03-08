@@ -43,11 +43,12 @@ function handleGridItem(widget: IWidgetItem) {
 function handleAddWidget(widget: IWidgetItem) {
   const node: IWidgetItem = {
     ...widget,
-    x: 0,
-    y: 0,
-    w: +widget.size.split("x")[1],
-    h: +widget.size.split("x")[0],
   };
+  if (widget.type === "component") {
+    const [h, w] = widget.size.split("x");
+    node.h = Number(h);
+    node.w = Number(w);
+  }
   activeNav.value?.children.push(node);
   const { id: activeNavId } = activeNav.value;
   const grid = containerRef.value?.grids.find(
@@ -55,6 +56,10 @@ function handleAddWidget(widget: IWidgetItem) {
   );
   nextTick(() => {
     grid?.makeWidget(node.id);
+    const nav = activeNav.value?.children.find((it) => it.id === node.id);
+    const nd = grid?.engine?.nodes.find((it) => it.id === node.id);
+    nav!.x = nd?.x;
+    nav!.y = nd?.y;
   });
 }
 </script>

@@ -9,7 +9,6 @@ interface AppState {
 }
 
 function getNavData(): INavConfig[] {
-  console.info("🚀 ~ log:222222 ----->", 222222);
   const localData = sessionStorage.getItem("navConfig");
   if (localData && localData.length > 0) {
     return JSON.parse(localData);

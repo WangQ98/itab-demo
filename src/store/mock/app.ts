@@ -6,7 +6,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "安全活动",
-    src: "aqhd.png",
+    src: "app/aqhd.png",
     backgroundColor: "",
   },
   {
@@ -14,7 +14,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "材料溯源",
-    src: "clsy.png",
+    src: "app/clsy.png",
     backgroundColor: "",
   },
   {
@@ -22,7 +22,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "工地云课堂",
-    src: "gdykt.png",
+    src: "app/gdykt.png",
     backgroundColor: "",
   },
   {
@@ -30,7 +30,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "工薪守护",
-    src: "gxsh.png",
+    src: "app/gxsh.png",
     backgroundColor: "",
   },
   {
@@ -38,7 +38,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "会议管理",
-    src: "hygl.png",
+    src: "app/hygl.png",
     backgroundColor: "",
   },
   {
@@ -46,7 +46,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "科研创新",
-    src: "kycx.png",
+    src: "app/kycx.png",
     backgroundColor: "",
   },
   {
@@ -54,7 +54,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "劳务人员",
-    src: "lwry.png",
+    src: "app/lwry.png",
     backgroundColor: "",
   },
   {
@@ -62,7 +62,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "廉洁管理",
-    src: "ljgl.png",
+    src: "app/ljgl.png",
     backgroundColor: "",
   },
   {
@@ -70,7 +70,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "履约人员",
-    src: "lyry.png",
+    src: "app/lyry.png",
     backgroundColor: "",
   },
   {
@@ -78,7 +78,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "内业资料",
-    src: "nyzl.png",
+    src: "app/nyzl.png",
     backgroundColor: "",
   },
   {
@@ -86,7 +86,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "人员管理",
-    src: "rygl.png",
+    src: "app/rygl.png",
     backgroundColor: "",
   },
   {
@@ -94,7 +94,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "人员试岗",
-    src: "rysg.png",
+    src: "app/rysg.png",
     backgroundColor: "",
   },
   {
@@ -102,7 +102,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "设备信息",
-    src: "sbxx.png",
+    src: "app/sbxx.png",
     backgroundColor: "",
   },
   {
@@ -110,7 +110,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "视频监控",
-    src: "spjk.png",
+    src: "app/spjk.png",
     backgroundColor: "",
   },
   {
@@ -118,7 +118,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "数字党建",
-    src: "szdj.png",
+    src: "app/szdj.png",
     backgroundColor: "",
   },
   {
@@ -126,7 +126,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "危大工程",
-    src: "wdgc.png",
+    src: "app/wdgc.png",
     backgroundColor: "",
   },
   {
@@ -134,7 +134,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "无人化培训",
-    src: "wrhpx.png",
+    src: "app/wrhpx.png",
     backgroundColor: "",
   },
   {
@@ -142,7 +142,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "项目OA",
-    src: "oa.png",
+    src: "app/oa.png",
     backgroundColor: "",
   },
   {
@@ -150,7 +150,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "宣传素材库",
-    src: "xcsck.png",
+    src: "app/xcsck.png",
     backgroundColor: "",
   },
   {
@@ -158,7 +158,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "隐患排查",
-    src: "yhpc.png",
+    src: "app/yhpc.png",
     backgroundColor: "",
   },
   {
@@ -166,15 +166,15 @@ export const appData = [
     url: "",
     type: "icon",
     name: "智慧工地BI",
-    src: "bi.png",
+    src: "app/bi.png",
     backgroundColor: "",
   },
   {
     id: generateUUID(),
     url: "",
     type: "icon",
-    name: "智慧粮厂",
-    src: "zhlc.png",
+    name: "智慧梁场",
+    src: "app/zhlc.png",
     backgroundColor: "",
   },
   {
@@ -182,7 +182,7 @@ export const appData = [
     url: "",
     type: "icon",
     name: "智慧品控",
-    src: "zhpk.png",
+    src: "app/zhpk.png",
     backgroundColor: "",
   },
   {

@@ -1,55 +1,70 @@
 <template>
   <Dialog v-model="dialogVisible">
     <template #aside>
-      <div class="w-50 h-full bg-white pt-[60px] p-[10px]">
+      <div class="w-full h-full pt-[60px] p-[10px]">
         <ul class="aside-list">
-          <li>小组件</li>
-          <li>网址导航</li>
-          <li>自定义图标</li>
+          <li
+            v-for="it in tabs"
+            :key="it.id"
+            class="aside-item"
+            :class="{ active: it.id == activeTab.id }"
+            @click="activeTab = it"
+          >
+            {{ it.label }}
+          </li>
         </ul>
       </div>
     </template>
     <template #main>
-      <div class="flex-1 bg-[#f1f0f5] px-[10px] overflow-scroll">
-        <div class="flex w-full py-4 gap-2" />
-        <!-- <ul class="category-wrap flex">
-          <li
-            v-for="category in IconCategory"
-            :key="category"
-            class="mr-[12px]"
-            @click="switchTag(category)"
-          >
-            <el-tag class="cursor-pointer" round>
-              {{ category }}
-            </el-tag>
-          </li>
-        </ul> -->
-        <div class="widget-list-wrap grid grid-cols-2 gap-4">
-          <CarouselBox
-            v-for="(categoryWidget, idx) in mapIWidgetCategory()"
-            :key="idx"
-            :category-widget="categoryWidget"
-            @append-widget="appendWidget"
-          />
-        </div>
+      <div class="h-full px-[10px] overflow-scroll">
+        <component
+          :is="activeTab.component"
+          @add="($event: Event) => $emit('add', $event)"
+        />
       </div>
     </template>
   </Dialog>
 </template>
 
 <script setup lang="ts">
-import { generateUUID } from "@/utils";
-import itabMaterials from "@/utils/itabMaterials";
-import { IconCategory } from "@/enums";
 import { Dialog } from "@/components/Dialog";
-import CarouselBox from "../ContainerBox/index.vue";
-import type { IWidgetCategory, IWidgetComponent, IWidgetItem } from "#/config";
+import Widget from "./components/Widget.vue";
+import UrlNavigation from "./components/UrlNavigation.vue";
+import CustomIcon from "./components/CustomIcon.vue";
+import type { IWidgetItem } from "#/config";
+import type { Component } from "vue";
+
+interface ITab {
+  id: string;
+  icon: string;
+  label: string;
+  component: Component;
+}
+
+const tabs: ITab[] = [
+  {
+    id: "1",
+    icon: "",
+    label: "小组件",
+    component: Widget,
+  },
+  {
+    id: "2",
+    icon: "",
+    label: "网址导航",
+    component: UrlNavigation,
+  },
+  {
+    id: "3",
+    icon: "",
+    label: "自定义图标",
+    component: CustomIcon,
+  },
+];
 
 const props = defineProps<{
   modelValue: boolean;
 }>();
-
-const { proxy } = useCurrentInstance();
 
 const emit = defineEmits<{
   (event: "update:modelValue", value: boolean): void;
@@ -58,33 +73,7 @@ const emit = defineEmits<{
 
 const dialogVisible = useVModel(props, "modelValue", emit);
 
-const categoryValue = ref<IWidgetCategory>(IconCategory.develop);
-
-function mapIWidgetCategory() {
-  const categorySet = itabMaterials.getMaterials(categoryValue.value) || [];
-  return [...categorySet];
-}
-
-function appendWidget(widget: IWidgetComponent, label: string) {
-  emit("add", widgetFactory(widget, label));
-}
-
-// function switchTag(category: IWidgetCategory) {
-//   categoryValue.value = category;
-// }
-
-function widgetFactory(widget: IWidgetComponent, label: string): IWidgetItem {
-  if (!widget) {
-    return proxy?.$message.error("当前组件为null");
-  }
-  return {
-    id: generateUUID(),
-    name: label,
-    component: widget.name || null,
-    size: widget.size,
-    type: widget.type,
-  };
-}
+const activeTab = shallowRef<ITab>(tabs[0]);
 </script>
 
 <style lang="less" scoped>
@@ -99,13 +88,17 @@ function widgetFactory(widget: IWidgetComponent, label: string): IWidgetItem {
   list-style: none;
   li {
     margin: 5px 0;
-    padding: 12px 1px;
+    padding: 12px 18px;
     &:hover {
       color: @active-color;
     }
+    &.active {
+      transition: color 0.2s;
+      color: #1890ff;
+      border-color: #1890ff;
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+    }
   }
-}
-.active {
-  color: @active-color;
 }
 </style>

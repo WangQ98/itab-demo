@@ -2,7 +2,7 @@
   <div class="widget-icon-item">
     <div class="app-icon-body">
       <div class="flex flex-col items-center">
-        <h4 class="h-5 mb-2 mt-1 text-[16px] text-[#222]">
+        <h4 class="h-5 mb-2 mt-1 text-[16px] text-white">
           {{ categoryWidget.title }}
         </h4>
         <div class="text-[#939393] text-[12px]">
