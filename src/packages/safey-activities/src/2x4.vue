@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full h-full">
-    <img class="w-full h-full" src="@/assets/images/safe.png" alt="" />
+    <img class="w-full h-full" src="@/assets/images/widgets/7.png" alt="" />
   </div>
 </template>
 
@@ -8,8 +8,8 @@
 import { IconSize, IconType } from "@/enums";
 
 defineOptions({
-  name: "Safe2x3",
-  size: IconSize.s4x6,
+  name: "Activities3x4",
+  size: IconSize.s3x4,
   type: IconType.component,
 });
 </script>

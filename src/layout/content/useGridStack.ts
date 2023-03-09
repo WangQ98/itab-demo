@@ -11,7 +11,7 @@ export default function useGridStack() {
   onMounted(() => {
     nextTick(() => {
       grids.value = GridStack.initAll({
-        cellHeight: "100px",
+        cellHeight: "120px",
         minRow: 1,
       });
 

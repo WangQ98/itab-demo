@@ -30,7 +30,7 @@
                         />
                       </div>
                       <p
-                        class="text-white-sm text-sm text-center pt-[8px] w-full"
+                        class="text-white-sm text-sm text-center pt-[8px] w-10/12 truncate"
                       >
                         {{ it.name }}
                       </p>
@@ -53,10 +53,12 @@
                         <component
                           :is="it.component"
                           :key="it.id"
-                          class="bg-[rgba(0,0,0,0.3)] rounded-[16px]"
+                          class="rounded-[16px]"
                         />
                       </div>
-                      <p class="text-white-sm text-sm text-center pt-[8px]">
+                      <p
+                        class="text-white-sm text-sm text-center pt-[8px] w-full truncate"
+                      >
                         {{ it.name }}
                       </p>
                     </div>
